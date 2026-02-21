@@ -1,0 +1,317 @@
+/* Page Header */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h1 {
+    font-size: 2.8rem;
+    color: #2E7D32;
+    margin-bottom: 10px;
+}
+
+.page-header p {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Annonces Controls */
+.annonces-controls {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-bar {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    gap: 10px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+.search-bar button {
+    padding: 12px 25px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-bar button:hover {
+    background-color: #388E3C;
+}
+
+.filter-section {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-section select {
+    padding: 12px 20px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.filter-section select:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+/* Annonces Grid */
+.annonces-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.annonce-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.annonce-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.annonce-header {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    background-color: #f9f9f9;
+}
+
+.annonce-category {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.annonce-category.vente {
+    background-color: #E8F5E9;
+    color: #2E7D32;
+}
+
+.annonce-category.achat {
+    background-color: #E3F2FD;
+    color: #1565C0;
+}
+
+.annonce-category.service {
+    background-color: #FFF3E0;
+    color: #EF6C00;
+}
+
+.annonce-category.emploi {
+    background-color: #F3E5F5;
+    color: #7B1FA2;
+}
+
+.annonce-title {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.annonce-body {
+    padding: 20px;
+    flex: 1;
+}
+
+.annonce-description {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.annonce-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    color: #777;
+}
+
+.annonce-detail {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.annonce-footer {
+    padding: 15px 20px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.annonce-price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #2E7D32;
+}
+
+.annonce-actions button {
+    padding: 8px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 0.9rem;
+}
+
+.annonce-actions button:hover {
+    background-color: #388E3C;
+}
+
+/* Subscription Section */
+.subscription-section {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    color: white;
+    padding: 50px;
+    border-radius: 15px;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.subscription-card {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.subscription-card h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.subscription-card > p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+.subscription-stats {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 25px 0;
+}
+
+.subscription-stats p {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.subscription-stats span {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#subscribe-btn {
+    background-color: white;
+    color: #2E7D32;
+    font-size: 1.2rem;
+    padding: 15px 30px;
+    margin: 20px 0;
+}
+
+#subscribe-btn:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+}
+
+.subscription-note {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .annonces-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-bar {
+        min-width: 100%;
+    }
+    
+    .filter-section {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .annonces-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .subscription-section {
+        padding: 30px 20px;
+    }
+    
+    .subscription-card h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .annonce-footer {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .page-header h1 {
+        font-size: 2.2rem;
+    }
+}

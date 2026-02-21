@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Annonces</title>
+    <style>
+        .annonce-card { border: 1px solid #ccc; padding: 15px; margin: 10px; }
+        .btn-subscribe { background: green; color: white; padding: 10px; border: none; cursor: pointer; }
+        .btn-contact { background: blue; color: white; padding: 5px 10px; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Test Annonces</h1>
+    
+    <div id="annonces-container"></div>
+    
+    <div style="margin-top: 30px;">
+        <p>Abonnés: <span id="current-subs">245</span></p>
+        <button id="subscribe-btn" class="btn-subscribe">S'abonner</button>
+    </div>
+
+    <script>
+    // Script SIMPLE qui fonctionne
+    const container = document.getElementById('annonces-container');
+    const annonces = [
+        { title: 'Vente de riz', price: '25000 FCFA', contact: '78 123 45 67' },
+        { title: 'Recherche ouvriers', price: '5000 FCFA/jour', contact: '77 123 45 67' }
+    ];
+    
+    annonces.forEach(a => {
+        const div = document.createElement('div');
+        div.className = 'annonce-card';
+        div.innerHTML = `
+            <h3>${a.title}</h3>
+            <p>Prix: ${a.price}</p>
+            <button class="btn-contact" onclick="alert('Contact: ${a.contact}')">
+                Contacter
+            </button>
+        `;
+        container.appendChild(div);
+    });
+    
+    // Bouton s'abonner
+    document.getElementById('subscribe-btn').onclick = function() {
+        const span = document.getElementById('current-subs');
+        span.textContent = parseInt(span.textContent) + 1;
+        alert('Abonné ! Total: ' + span.textContent);
+    };
+    </script>
+</body>
+</html>

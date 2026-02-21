@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Mbaay Mi</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-seedling"></i>
+                <span>Mbaay Mi</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="annonces.html"><i class="fas fa-bullhorn"></i> Annonces</a></li>
+                <li><a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="dashboard.html"><i class="fas fa-chart-bar"></i> Tableau de bord</a></li>
+            </ul>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <header class="page-header">
+            <h1>Contactez-Nous</h1>
+            <p>Nous sommes là pour répondre à vos questions sur l'agriculture</p>
+        </header>
+
+        <div class="contact-container">
+            <!-- Contact Form -->
+            <section class="contact-form-section">
+                <h2><i class="fas fa-paper-plane"></i> Formulaire de Contact</h2>
+                <p>Remplissez ce formulaire pour nous envoyer un message. Nous vous répondrons dans les plus brefs délais.</p>
+                
+                <form id="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="prenom"><i class="fas fa-user"></i> Prénom *</label>
+                            <input type="text" id="prenom" name="prenom" required>
+                            <div class="error-message" id="prenom-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="nom"><i class="fas fa-user"></i> Nom *</label>
+                            <input type="text" id="nom" name="nom" required>
+                            <div class="error-message" id="nom-error"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email *</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error-message" id="email-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message"><i class="fas fa-comment"></i> Votre Message *</label>
+                        <textarea id="message" name="message" rows="5" required></textarea>
+                        <div class="error-message" id="message-error"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sujet"><i class="fas fa-tag"></i> Sujet</label>
+                        <select id="sujet" name="sujet">
+                            <option value="information">Demande d'information</option>
+                            <option value="support">Support technique</option>
+                            <option value="annonce">Publication d'annonce</option>
+                            <option value="partenariat">Partenariat</option>
+                            <option value="autre">Autre</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> Envoyer le Message
+                    </button>
+                </form>
+                
+                <!-- Confirmation Message (hidden by default) -->
+                <div id="confirmation-message" class="confirmation-message">
+                    <div class="confirmation-content">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Message Envoyé avec Succès!</h3>
+                        <p>Merci <span id="user-name"></span>! Nous avons bien reçu votre message et nous vous répondrons à l'adresse <span id="user-email"></span> dans les plus brefs délais.</p>
+                        <button id="new-message-btn" class="btn-secondary">
+                            <i class="fas fa-plus"></i> Nouveau Message
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Contact Information -->
+            <aside class="contact-info">
+                <div class="info-card">
+                    <h2><i class="fas fa-info-circle"></i> Informations de Contact</h2>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Adresse</h3>
+                            <p>ISEP Diamniadio<br>Pôle urbain de Diamniadio<br>Sénégal</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Téléphone</h3>
+                            <p>+221 33 123 45 67<br>Lun - Ven: 8h00 - 18h00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>contact@mbaaymi.sn<br>support@mbaaymi.sn</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Horaires d'Ouverture</h3>
+                            <p>Lundi - Vendredi: 8h00 - 18h00<br>Samedi: 9h00 - 13h00</p>
+                        </div>
+                    </div>
+                    
+                    <div class="social-contact">
+                        <h3>Suivez-nous</h3>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-icon whatsapp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Mbaay Mi</h3>
+                <p>Plateforme agricole pour un Sénégal nourricier</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="annonces.html">Annonces</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="dashboard.html">Tableau de bord</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p><i class="fas fa-envelope"></i> contact@mbaaymi.sn</p>
+                <p><i class="fas fa-phone"></i> +221 33 123 45 67</p>
+                <p><i class="fas fa-map-marker-alt"></i> Diamniadio, Sénégal</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Mbaay Mi. Tous droits réservés. Projet ISEP Diamniadio.</p>
+        </div>
+    </footer>
+
+    <script src="js/common.js"></script>
+    <script src="js/contact.js"></script>
+</body>
+</html>

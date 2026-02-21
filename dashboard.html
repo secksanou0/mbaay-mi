@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord - Mbaay Mi</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Styles supplémentaires pour les boutons */
+        .btn-simulation {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: background-color 0.3s;
+        }
+        .btn-simulation:hover {
+            background-color: #45a049;
+        }
+        .btn-simulation i {
+            margin-right: 8px;
+        }
+        .simulation-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .alert-item {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
+        .activity-item {
+            background-color: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
+        #clear-alerts {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        #clear-alerts:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-seedling"></i>
+                <span>Mbaay Mi</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="annonces.html"><i class="fas fa-bullhorn"></i> Annonces</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="dashboard.html" class="active"><i class="fas fa-chart-bar"></i> Tableau de bord</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <header class="page-header">
+            <h1><i class="fas fa-chart-bar"></i> Tableau de Bord</h1>
+            <p>Statistiques et activités de la plateforme Mbaay Mi</p>
+        </header>
+
+        <!-- Dashboard Stats -->
+        <section class="dashboard-stats">
+            <div class="stat-card">
+                <div class="stat-icon" style="background-color: #4CAF50;">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="total-abonnements">245</h3>
+                    <p>Abonnements Actifs</p>
+                    <div class="stat-trend up">
+                        <i class="fas fa-arrow-up"></i> <span>12% ce mois</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon" style="background-color: #2196F3;">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>58</h3>
+                    <p>Annonces Publiées</p>
+                    <div class="stat-trend up">
+                        <i class="fas fa-arrow-up"></i> <span>8% ce mois</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon" style="background-color: #FF9800;">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="total-messages">127</h3>
+                    <p>Messages Reçus</p>
+                    <div class="stat-trend up">
+                        <i class="fas fa-arrow-up"></i> <span>15% ce mois</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon" style="background-color: #9C27B0;">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>12</h3>
+                    <p>Régions Actives</p>
+                    <div class="stat-trend">
+                        <i class="fas fa-minus"></i> <span>Stable</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts-section">
+            <div class="chart-container">
+                <h2><i class="fas fa-chart-line"></i> Évolution des Abonnements</h2>
+                <div class="chart-wrapper">
+                    <canvas id="subscriptionsChart" style="width:100%; max-height:300px;"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h2><i class="fas fa-chart-pie"></i> Répartition par Catégorie</h2>
+                <div class="chart-wrapper">
+                    <canvas id="categoriesChart" style="width:100%; max-height:300px;"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity and Alerts -->
+        <section class="activity-section">
+            <div class="activity-container">
+                <h2><i class="fas fa-history"></i> Activité Récente</h2>
+                <div id="activity-list">
+                    <!-- Les activités seront ajoutées ici -->
+                </div>
+            </div>
+            
+            <div class="alerts-container">
+                <h2><i class="fas fa-exclamation-triangle"></i> Alertes et Notifications</h2>
+                <div id="alerts-list">
+                    <!-- Les alertes seront ajoutées ici -->
+                </div>
+                <button id="clear-alerts">
+                    <i class="fas fa-trash"></i> Effacer toutes les alertes
+                </button>
+            </div>
+        </section>
+
+        <!-- Detailed Statistics -->
+        <section class="detailed-stats">
+            <h2><i class="fas fa-table"></i> Statistiques Détaillées</h2>
+            <div class="stats-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Région</th>
+                            <th>Agriculteurs</th>
+                            <th>Annonces</th>
+                            <th>Taux d'Activité</th>
+                        </tr>
+                    </thead>
+                    <tbody id="regions-stats">
+                        <!-- Les statistiques seront ajoutées ici -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Simulation Controls -->
+        <section class="simulation-controls">
+            <h2><i class="fas fa-sliders-h"></i> Simulation des Données</h2>
+            <div class="simulation-buttons">
+                <button id="add-subscription" class="btn-simulation">
+                    <i class="fas fa-user-plus"></i> Ajouter un Abonné
+                </button>
+                <button id="remove-subscription" class="btn-simulation">
+                    <i class="fas fa-user-minus"></i> Retirer un Abonné
+                </button>
+                <button id="add-activity" class="btn-simulation">
+                    <i class="fas fa-plus-circle"></i> Ajouter une Activité
+                </button>
+                <button id="add-alert" class="btn-simulation">
+                    <i class="fas fa-exclamation-circle"></i> Ajouter une Alerte
+                </button>
+            </div>
+            <p class="simulation-note">Ces boutons permettent de simuler des changements dans les données</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Mbaay Mi</h3>
+                <p>Plateforme agricole pour un Sénégal nourricier</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Liens Rapides</h3>
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="annonces.html">Annonces</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="dashboard.html">Tableau de bord</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p><i class="fas fa-envelope"></i> contact@mbaaymi.sn</p>
+                <p><i class="fas fa-phone"></i> +221 33 123 45 67</p>
+                <p><i class="fas fa-map-marker-alt"></i> Diamniadio, Sénégal</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Mbaay Mi. Tous droits réservés. Projet ISEP Diamniadio.</p>
+        </div>
+    </footer>
+
+    <!-- Script principal - TOUS LES BOUTONS FONCTIONNENT ICI -->
+    <script>
+        // ===========================================
+        // SCRIPT PRINCIPAL - TOUS LES BOUTONS MARCHENT
+        // ===========================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ Dashboard chargé - Tous les boutons sont prêts!');
+            
+            // ========== DONNÉES INITIALES ==========
+            let abonnes = 245;
+            let messages = 127;
+            let activities = [
+                { id: 1, text: 'Nouvel abonnement: Amadou Diallo', time: 'Il y a 5 min' },
+                { id: 2, text: 'Message reçu: Demande d\'information', time: 'Il y a 15 min' },
+                { id: 3, text: 'Nouvelle annonce publiée', time: 'Il y a 1 heure' }
+            ];
+            let alerts = [
+                { id: 1, text: '⚠️ Annonce expirée: Vente de matériel', time: 'Il y a 2 heures' },
+                { id: 2, text: 'ℹ️ Mise à jour disponible', time: 'Il y a 1 jour' }
+            ];
+            
+            // ========== AFFICHAGE INITIAL ==========
+            document.getElementById('total-abonnements').textContent = abonnes;
+            document.getElementById('total-messages').textContent = messages;
+            
+            // Afficher les activités
+            updateActivityList();
+            updateAlertsList();
+            updateRegionsStats();
+            
+            // ========== INITIALISATION DES GRAPHIQUES ==========
+            initializeCharts();
+            
+            // ========== BOUTON 1 : AJOUTER UN ABONNÉ ==========
+            document.getElementById('add-subscription').addEventListener('click', function() {
+                abonnes++;
+                document.getElementById('total-abonnements').textContent = abonnes;
+                
+                // Ajouter une activité
+                activities.unshift({
+                    id: Date.now(),
+                    text: `✅ Nouvel abonnement ajouté (Total: ${abonnes})`,
+                    time: 'À l\'instant'
+                });
+                updateActivityList();
+                
+                // Mettre à jour le graphique
+                updateCharts();
+                
+                alert(`✅ Abonné ajouté! Total: ${abonnes}`);
+            });
+            
+            // ========== BOUTON 2 : RETIRER UN ABONNÉ ==========
+            document.getElementById('remove-subscription').addEventListener('click', function() {
+                if (abonnes > 245) { // Garder un minimum
+                    abonnes--;
+                    document.getElementById('total-abonnements').textContent = abonnes;
+                    
+                    activities.unshift({
+                        id: Date.now(),
+                        text: `❌ Abonnement retiré (Total: ${abonnes})`,
+                        time: 'À l\'instant'
+                    });
+                    updateActivityList();
+                    
+                    updateCharts();
+                    alert(`ℹ️ Abonné retiré. Total: ${abonnes}`);
+                } else {
+                    alert('⚠️ Nombre minimum d\'abonnements atteint (245)');
+                }
+            });
+            
+            // ========== BOUTON 3 : AJOUTER UNE ACTIVITÉ ==========
+            document.getElementById('add-activity').addEventListener('click', function() {
+                const activitiesList = [
+                    "Nouvelle inscription: Moussa Diop",
+                    "Message envoyé: Demande de devis",
+                    "Annonce consultée: Location de tracteur",
+                    "Profil mis à jour: Ferme Moderne",
+                    "Document téléchargé: Guide 2024"
+                ];
+                
+                const randomActivity = activitiesList[Math.floor(Math.random() * activitiesList.length)];
+                
+                activities.unshift({
+                    id: Date.now(),
+                    text: `📌 ${randomActivity}`,
+                    time: 'À l\'instant'
+                });
+                
+                // Garder seulement les 10 dernières activités
+                if (activities.length > 10) activities.pop();
+                
+                updateActivityList();
+                alert('✅ Activité ajoutée!');
+            });
+            
+            // ========== BOUTON 4 : AJOUTER UNE ALERTE ==========
+            document.getElementById('add-alert').addEventListener('click', function() {
+                const alertsList = [
+                    "⚠️ Météo: Pluies intenses à Thiès",
+                    "ℹ️ Formation: Irrigation demain 10h",
+                    "⚠️ Prix: Hausse des engrais +8%",
+                    "ℹ️ Nouveau: Contrats disponibles",
+                    "⚠️ Alerte: Maintenance prévue"
+                ];
+                
+                const randomAlert = alertsList[Math.floor(Math.random() * alertsList.length)];
+                
+                alerts.unshift({
+                    id: Date.now(),
+                    text: randomAlert,
+                    time: 'À l\'instant'
+                });
+                
+                // Garder seulement les 10 dernières alertes
+                if (alerts.length > 10) alerts.pop();
+                
+                updateAlertsList();
+                alert('🔔 Alerte ajoutée!');
+            });
+            
+            // ========== BOUTON 5 : EFFACER TOUTES LES ALERTES ==========
+            document.getElementById('clear-alerts').addEventListener('click', function() {
+                if (confirm('Voulez-vous vraiment effacer toutes les alertes?')) {
+                    alerts = [];
+                    updateAlertsList();
+                    
+                    activities.unshift({
+                        id: Date.now(),
+                        text: '🧹 Toutes les alertes ont été effacées',
+                        time: 'À l\'instant'
+                    });
+                    updateActivityList();
+                    
+                    alert('✅ Alertes effacées!');
+                }
+            });
+            
+            // ========== FONCTION POUR METTRE À JOUR LA LISTE DES ACTIVITÉS ==========
+            function updateActivityList() {
+                const list = document.getElementById('activity-list');
+                list.innerHTML = '';
+                
+                activities.forEach(activity => {
+                    const div = document.createElement('div');
+                    div.className = 'activity-item';
+                    div.innerHTML = `
+                        <div style="display: flex; gap: 10px; align-items: start;">
+                            <i class="fas fa-circle" style="color: #4CAF50; font-size: 10px; margin-top: 5px;"></i>
+                            <div>
+                                <strong>${activity.text}</strong><br>
+                                <small style="color: #666;">${activity.time}</small>
+                            </div>
+                        </div>
+                    `;
+                    list.appendChild(div);
+                });
+            }
+            
+            // ========== FONCTION POUR METTRE À JOUR LA LISTE DES ALERTES ==========
+            function updateAlertsList() {
+                const list = document.getElementById('alerts-list');
+                list.innerHTML = '';
+                
+                alerts.forEach(alert => {
+                    const div = document.createElement('div');
+                    div.className = 'alert-item';
+                    div.innerHTML = `
+                        <div style="display: flex; gap: 10px; align-items: start;">
+                            <i class="fas fa-exclamation-triangle" style="color: #ffc107;"></i>
+                            <div>
+                                <strong>${alert.text}</strong><br>
+                                <small style="color: #666;">${alert.time}</small>
+                            </div>
+                        </div>
+                    `;
+                    list.appendChild(div);
+                });
+            }
+            
+            // ========== FONCTION POUR METTRE À JOUR LES STATISTIQUES DES RÉGIONS ==========
+            function updateRegionsStats() {
+                const tbody = document.getElementById('regions-stats');
+                const regions = [
+                    { region: 'Dakar', farmers: 85 + Math.floor(Math.random() * 10), annonces: 22, activity: '85%' },
+                    { region: 'Thiès', farmers: 64 + Math.floor(Math.random() * 10), annonces: 18, activity: '78%' },
+                    { region: 'Saint-Louis', farmers: 42 + Math.floor(Math.random() * 5), annonces: 12, activity: '65%' },
+                    { region: 'Kaolack', farmers: 38 + Math.floor(Math.random() * 5), annonces: 10, activity: '62%' },
+                    { region: 'Ziguinchor', farmers: 31 + Math.floor(Math.random() * 5), annonces: 8, activity: '58%' },
+                    { region: 'Autres', farmers: 25 + Math.floor(Math.random() * 5), annonces: 6, activity: '45%' }
+                ];
+                
+                tbody.innerHTML = '';
+                regions.forEach(r => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td style="font-weight: bold; color: #4CAF50;">${r.region}</td>
+                        <td>${r.farmers}</td>
+                        <td>${r.annonces}</td>
+                        <td>${r.activity}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+            
+            // ========== FONCTION POUR INITIALISER LES GRAPHIQUES ==========
+            function initializeCharts() {
+                // Graphique des abonnements
+                const ctx1 = document.getElementById('subscriptionsChart').getContext('2d');
+                window.subChart = new Chart(ctx1, {
+                    type: 'line',
+                    data: {
+                        labels: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
+                        datasets: [{
+                            label: 'Abonnements',
+                            data: [245, 248, 252, 249, 255, 258, abonnes],
+                            borderColor: '#4CAF50',
+                            backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                            tension: 0.4,
+                            fill: true
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+                
+                // Graphique des catégories
+                const ctx2 = document.getElementById('categoriesChart').getContext('2d');
+                window.catChart = new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Vente', 'Achat', 'Services', 'Emplois'],
+                        datasets: [{
+                            data: [35, 25, 20, 20],
+                            backgroundColor: ['#4CAF50', '#2196F3', '#FF9800', '#9C27B0']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            }
+            
+            // ========== FONCTION POUR METTRE À JOUR LES GRAPHIQUES ==========
+            function updateCharts() {
+                if (window.subChart) {
+                    const data = window.subChart.data.datasets[0].data;
+                    data[data.length - 1] = abonnes; // Mettre à jour le dernier jour
+                    window.subChart.update();
+                }
+            }
+            
+            // ========== BONUS: Synchronisation avec les autres pages ==========
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'mbaaymi_total_subscriptions' && e.newValue) {
+                    abonnes = parseInt(e.newValue);
+                    document.getElementById('total-abonnements').textContent = abonnes;
+                    updateCharts();
+                }
+            });
+            
+            console.log('✅ Tous les boutons sont maintenant fonctionnels!');
+        });
+    </script>
+</body>
+</html>
